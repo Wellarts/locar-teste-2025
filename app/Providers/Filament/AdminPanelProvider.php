@@ -33,9 +33,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->favicon(asset('img/logo-motomaster.png'))
-            ->brandLogo(asset('img/logo-motomaster.png'))
-            ->brandLogoHeight('3rem')
+           // ->favicon(asset('img/logo-motomaster.png'))
+           // ->brandLogo(asset('img/logo-motomaster.png'))
+           // ->brandLogoHeight('3rem')
             ->colors([
                 'primary' => Color::Amber,
             ])
