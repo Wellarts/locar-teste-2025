@@ -54,7 +54,7 @@ class VeiculoResource extends Resource
                                     ->numeric(),
                                 Forms\Components\DatePicker::make('data_compra'),
                                 Forms\Components\TextInput::make('chassi')
-                                ->label('Nº do Chassi'),
+                                ->label('Chassi/Renavan'),
                                 Forms\Components\TextInput::make('valor_diaria')
                                     ->live(onBlur: true)
                                     ->label('Valor Diária')

@@ -124,7 +124,7 @@
         <b class="tx">Modelo:</b> {{$locacao->Veiculo->modelo}}
     </td>
     <td>
-        <b class="tx">Chassi:</b> {{$locacao->Veiculo->chassi}}
+        <b class="tx">Chassi/Renavan:</b> {{$locacao->Veiculo->chassi}}
     </td>
 </tr>
 <tr>
