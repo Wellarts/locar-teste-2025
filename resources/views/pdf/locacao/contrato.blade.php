@@ -66,7 +66,7 @@
 
 </table>
 <div class="retangulo">
-    <span class="texto">FICHA DE LOCAÇÃO</span>
+    <span class="texto">FATURA DE LOCAÇÃO</span>
 </div>
 <table>
 </table>
