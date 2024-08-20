@@ -227,7 +227,7 @@
         <p style="text-align: justify;" align="justify">{{$locacao->Veiculo->modelo}}, <strong>chassi-Renavan</strong> {{$locacao->Veiculo->chassi}}, <strong>cor</strong> {{$locacao->Veiculo->cor}}, <strong>ano</strong> {{$locacao->Veiculo->ano}}, <strong>quilometragem atua</strong>l {{$locacao->Veiculo->km_atual}}, <strong>placas</strong> {{$locacao->Veiculo->placa}}.</p>
         <p style="text-align: justify;" align="justify">1.2 O Ve&iacute;culo descrito acima ser&aacute; utilizado exclusivamente pelo LOCAT&Aacute;RIO, n&atilde;o sendo permitido sub-rogar para terceiros os direitos por ele obtidos atrav&eacute;s do presente contrato, nem permitir que outra pessoa conduza o referido ve&iacute;culo sem a inequ&iacute;voca e expressa autoriza&ccedil;&atilde;o do LOCADOR, sob pena de rescis&atilde;o contratual, multa de R$ 500,00 (quinhentos reais) bem como responsabiliza&ccedil;&atilde;o total por qualquer ato ou dano em rela&ccedil;&atilde;o ao ve&iacute;culo, inclusive os provenientes de caso fortuito ou for&ccedil;a maior.</p>
         <p style="text-align: justify;" align="justify">CL&Aacute;USULA SEGUNDA - DO HOR&Aacute;RIO DO ALUGUEL E LOCAL DE COLETA E DEVOLU&Ccedil;&Atilde;O DO VE&Iacute;CULO.</p>
-        <p style="text-align: justify;" align="justify">2.1 A presente loca&ccedil;&atilde;o ter&aacute; o lapso temporal de validade de 365 dias, iniciando no dia 09 de Agosto de 2024 e terminando no dia 09 de agosto de 2025,&nbsp;na qual o ve&iacute;culo dever&aacute; ser devolvido.&nbsp;</p>
+        <p style="text-align: justify;" align="justify">2.1 A presente loca&ccedil;&atilde;o ter&aacute; o lapso temporal de validade de 365 dias, iniciando no dia {{\Carbon\Carbon::parse($locacao->data_saida)->format('d/m/Y')}} e terminando no dia {{\Carbon\Carbon::parse($locacao->data_retorno)->format('d/m/Y')}},&nbsp;na qual o ve&iacute;culo dever&aacute; ser devolvido.&nbsp;</p>
         <p style="text-align: justify;" align="justify">2.2 O LOCAT&Aacute;RIO dever&aacute; apresentar o ve&iacute;culo ao locador 01 (uma) vez por m&ecirc;s para a realiza&ccedil;&atilde;o de vistoria, em data e endere&ccedil;o por este designado.</p>
         <p style="text-align: justify;" align="justify">2.3 A n&atilde;o apresenta&ccedil;&atilde;o do ve&iacute;culo no prazo e local supracitados acarretar&aacute; ao LOCAT&Aacute;RIO multa de R$200,00 (duzentos reais) por dia de atraso, al&eacute;m de poss&iacute;vel rescis&atilde;o contratual.</p>
         <p style="text-align: justify;" align="justify"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;">&sect; &Uacute;nico &ndash; A presente cl&aacute;usula tem por objetivo manter a motocicleta em perfeitas condi&ccedil;&otilde;es de uso e principalmente promover a ampla prote&ccedil;&atilde;o do Locat&aacute;rio</span></span><span style="color: #ff0000;"><span style="font-family: 'Times New Roman', serif;"><span style="font-size: medium;">.</span></span></span></p>
@@ -341,13 +341,13 @@
 
 </div><br><br>
 
-        <div style="text-align: center; font-size: 12">Rio de Janeiro, {{ $dataAtual->isoFormat('DD MMMM YYYY') }}<br><br><br><br>
+        <div style="text-align: center; font-size: 12">S&atilde;o Jos&eacute; /SC, {{ $dataAtual->isoFormat('DD MMMM YYYY') }}<br><br><br><br>
 
             ___________________________________________________________<br>
-            LOCATÁRIO: {{$locacao->Cliente->nome}}<br><Br><br><br>
+            LOCATÁRIO: {{$locacao->Cliente->nome}}<br><br><br><br>
 
             ___________________________________________________________<br>
-            LOCADOR: MOTOMASTER CAMPO GRANDE LTDA.
+            LOCADOR: HB MOTO CENTER.
 
 
 
