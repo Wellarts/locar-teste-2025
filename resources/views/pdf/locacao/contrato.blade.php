@@ -60,7 +60,7 @@
          <p style="font-size:16px;" align="center">HINKEL E BILCK LOCACAO E COMERCIO LTDA,<br>
                                                              Cnpj: 56.284.481/0001-69,<br>
                                                  e-mail: sinclerbilck@gmail.com, telefone (48) 99052687,<br>
-                                                 R. S&atilde;o Pedro, n&deg;1283, Bairro, Areias - S&atilde;o Jos&eacute; /SC,</p>
+                                                 R. S&atilde;o Pedro, n&deg;1283, Bairro, Areias - S&atilde;o Jos&eacute; - SC,</p>
     </td>
 </tr>
 
@@ -341,7 +341,7 @@
 
 </div><br><br>
 
-        <div style="text-align: center; font-size: 12">S&atilde;o Jos&eacute; /SC, {{ $dataAtual->isoFormat('DD MMMM YYYY') }}<br><br><br><br>
+        <div style="text-align: center; font-size: 12">S&atilde;o Jos&eacute; - SC, {{ $dataAtual->isoFormat('DD MMMM YYYY') }}<br><br><br><br>
 
             ___________________________________________________________<br>
             LOCATÁRIO: {{$locacao->Cliente->nome}}<br><br><br><br>
