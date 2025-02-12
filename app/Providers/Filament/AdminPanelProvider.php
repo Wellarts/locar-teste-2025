@@ -38,7 +38,7 @@ class AdminPanelProvider extends PanelProvider
             ->databaseNotifications()
             ->favicon(asset('img/logo.png'))
             ->brandLogo(asset('img/logo.png'))
-            ->brandLogoHeight('3rem')
+            ->brandLogoHeight('2rem')
             ->colors([
                 'primary' => Color::Amber,
             ])
