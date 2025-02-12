@@ -2,42 +2,54 @@
 <html>
 <head>
 
-<style>
-    .retangulo {
-        width: 100%;
-        height: 2.5%;
-        background-color: rgb(222, 225, 226);
-        display: flex;
-        align-items: center;
-        text-align: center;
-    }
-    .texto {
-        margin: auto;
-        font-weight: bold;
-        font-size: 16px;
+    <style>
+        .retangulo {
+            width: 100%;
+            height: 2.5%;
+            background-color: rgb(222, 225, 226);
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        .texto {
+            margin: auto;
+            font-weight: bold;
+            font-size: 16px;
 
-    }
-    .tabelas {
-        border: 1px;
-        border-style: solid;
-        border-color: grey;
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-
-    #ficha td {
-    border: 1px solid rgb(160 160 160);
-    padding: 8px 10px;
-    }
+        }
+        .tabelas {
+            border: 1px;
+            border-style: solid;
+            border-color: grey;
+            width: 100%;
+            border-collapse: collapse;
+        }
 
 
-    .tx {
-        line-height:1.5;
-        font-size: 15px;
-    }
+        #ficha td {
+        border: 1px solid rgb(160 160 160);
+        padding: 0px 2px;
+        }
 
-</style>
+
+        .tx {
+            line-height:1.5;
+            font-size: 15px;
+        }
+
+    </style>
+
+    <style>
+        .tela {
+            width: 100%;
+            height: 100px;
+            border: 0px solid black;
+            float: center;
+            text-align: center;
+
+        }
+    </style>
+
 
 <style>
     .tela {
@@ -66,7 +78,7 @@
 
 </table>
 <div class="retangulo">
-    <span class="texto">FATURA DE LOCAÇÃO</span>
+    <span class="texto">FICHA DE LOCAÇÃO</span>
 </div>
 <table>
 </table>
@@ -124,7 +136,7 @@
         <b class="tx">Modelo:</b> {{$locacao->Veiculo->modelo}}
     </td>
     <td>
-        <b class="tx">Chassi/Renavan:</b> {{$locacao->Veiculo->chassi}}
+        <b class="tx">Chassi:</b> {{$locacao->Veiculo->chassi}}
     </td>
 </tr>
 <tr>
@@ -192,6 +204,90 @@
 </tr>
 </table>
 
+<div class="container">
+    <div class="tela">
+        <table>
+            <tr>
+                <td>
+                    <h3>Inspeção de Veículo</h3>
+                    <tr>
+                        <td>( ) Documento</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Calota</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Macaco</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Estepe</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Trava</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Triângulo</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Tapetes</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Ar Condicionado</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Som</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Retrovisores</td>
+                    </tr>
+                    <tr>
+                        <td>( ) Antena</td>
+                    </tr>
+                    
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<div style="margin-left: 300px">
+    <table style="width: 100%">
+        <tr>
+            <td><p style="margin-left: 90px">Mogi das Cruzes - SP, {{ $dataAtual->isoFormat('DD MMMM YYYY') }}</p></td>
+        </tr>
+        <br><br><br>
+        <tr>
+            <td>
+                <tr>
+                    <td><center>_________________________________________</center><br>
+                                <center>LOCADOR: EXPRESSO RENT CAR.</center>
+                    <p style = "font-size:10px; text-align: center">Proprietário ou representante legal da Empresa</p>
+                    </td>
+                </tr>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <tr>
+                    <td>
+                        <div>
+                           <center> _________________________________________</center><br>
+                                    <center>LOCATÁRIO: {{$locacao->Cliente->nome}}</center>
+
+                        </div>
+                    </td>
+                </tr>
+
+            </td>
+        </tr>
+       </table>
+
+</div>
+<div style="margin-top: 50px">Observações da Inspeção:_________________________________________________________________<br>
+______________________________________________________________________________________</div>
+
 <!-- PÁGINA 2 -->
 
 <style>
@@ -223,14 +319,13 @@
 <p style="text-align: justify;">1.1 O objeto do presente contrato &eacute; a loca&ccedil;&atilde;o de 01 (um) carro, conforme anexo autom&oacute;vel {{$locacao->Veiculo->Marca->nome}}/{{$locacao->Veiculo->modelo}}, cor {{$locacao->Veiculo->cor}} ano de fabrica&ccedil;&atilde;o {{$locacao->Veiculo->ano}}, placa {{$locacao->Veiculo->placa}}, RENAVAM {{$locacao->Veiculo->renavam}}, CHASSI n&ordm; {{$locacao->Veiculo->chassi}}, combust&iacute;vel FLEX, sem motorista.</p>
 <p style="text-align: justify;">1.2. O ve&iacute;culo locado se encontram em regular funcionamento, em conformidade com vistoria assinada pelas partes, conforme anexo (Check List).</p>
 <p style="text-align: justify;"><strong>CL&Aacute;USULA SEGUNDA - DO VALOR DA LOCA&Ccedil;&Atilde;O</strong>.</p>
-<p style="text-align: justify;">2.1. Em contrapresta&ccedil;&atilde;o a tudo o quanto disposto neste contrato, o LOCAT&Aacute;RIO pagar&aacute; o valor unit&aacute;rio da primeira loca&ccedil;&atilde;o do ve&iacute;culo de R$ 2.683,00 (Dois mil seiscentos&nbsp;e oitenta e tr&ecirc;s reais) perfazendo o valor mensal de R$ 2.300,00 (Dois mil e trezentos reais), que dever&aacute; ser pago no vencimento, desse valor&nbsp;no segundo m&ecirc;s em diante ser&nbsp;pago 30 (trinta) dias ap&oacute;s a retirada do ve&iacute;culo.</p>
+<p style="text-align: justify;">2.1. Em contrapresta&ccedil;&atilde;o a tudo o quanto disposto neste contrato, o LOCAT&Aacute;RIO pagar&aacute; o valor total de R$ {{$locacao->valor_total_desconto}}.</p>
 <p style="text-align: justify;">2.2. Fica estipulado a quantidade de 5000 (cinco mil) KM por m&ecirc;s, ser&aacute; cobrado 0,63 centavos por Km rodado a mais da quantidade de 5000 (cinco mil) KM.</p>
 <p style="text-align: justify;">2.3. O atraso no pagamento ensejar&aacute; a incid&ecirc;ncia de multa morat&oacute;ria de 2% (dois por cento) sobre o valor devido, al&eacute;m de juros 1% (um por cento) ao m&ecirc;s.</p>
 <p style="text-align: justify;">2.4 O pagamento poder&aacute; ser feito por transfer&ecirc;ncia ou boleto banc&aacute;rio pelo LOCAT&Aacute;RIO, ap&oacute;s a emiss&atilde;o das respectivas faturas pelo LOCADOR.</p>
 <p style="text-align: justify;">2.5. N&atilde;o ser&aacute; permitido desconto em banco ou organiza&ccedil;&atilde;o financeira, de t&iacute;tulos correspondentes &agrave; cobran&ccedil;a de fornecimentos ou servi&ccedil;os, prestados &agrave; CONTRATANTE.</p>
 <p style="text-align: justify;">2.6. Eventuais servi&ccedil;os adicionais que n&atilde;o estiverem inclu&iacute;dos no Item 1.1 do presente contrato dever&aacute; ser negociado &agrave; parte, mediante a celebra&ccedil;&atilde;o do instrumento correspondente.</p>
-<p style="text-align: justify;">&nbsp;</p>
-<p style="text-align: justify;"><strong>CL&Aacute;USULA TERCEIRA - OBRIGA&Ccedil;&Otilde;ES DO LOCADOR </strong></p>
+<p style="text-align: justify;"><strong>CL&Aacute;USULA TERCEIRA - OBRIGA&Ccedil;&Otilde;ES DO LOCADOR</strong></p>
 <p style="text-align: justify;">3.1 O LOCADOR &eacute; obrigado a:</p>
 <p style="text-align: justify;">a). Fornece toda a documenta&ccedil;&atilde;o necess&aacute;ria para que o ve&iacute;culo possa trafegar em conformidade com a legisla&ccedil;&atilde;o, em especial documenta&ccedil;&atilde;o de seguro obrigat&oacute;rio e comprovante de pagamento do IPVA do ano em curso;</p>
 <p style="text-align: justify;">b). Substituir o autom&oacute;vel caso seja constatado algum problema t&eacute;cnico-mec&acirc;nico no prazo de 24 horas, de forma que o ve&iacute;culo esteja sempre &agrave; disposi&ccedil;&atilde;o do LOCAT&Aacute;RIO, em perfeito estado de funcionamento, durante todo o per&iacute;odo do contrato de loca&ccedil;&atilde;o.</p>
@@ -259,65 +354,56 @@
 <ol style="text-align: justify;">
 <li>d) efetuar os pagamentos dos servi&ccedil;os executados na forma e nos prazos estabelecidos neste instrumento, desde que cumpridas, regular e integralmente, as obriga&ccedil;&otilde;es assumidas pelo LOCADOR</li>
 </ol>
-<p style="text-align: justify;">&nbsp;</p>
 <p style="text-align: justify;">5.1 durante a vig&ecirc;ncia do presente contrato, todas as multas de tr&acirc;nsito que vierem a ser aplicadas ser&atilde;o de responsabilidade do LOCAT&Aacute;RIO e, se pagas pelo LOCADOR, ser&atilde;o reembolsados no prazo de 30 (trinta) dias.</p>
-<p style="text-align: justify;">&nbsp;</p>
 <p style="text-align: justify;"><strong>CL&Aacute;USULA SEXTA &ndash; DO PRAZO DE VIG&Ecirc;NCIA </strong></p>
 <p style="text-align: justify;">6.1. O presente Contrato vigorar&aacute; pelo prazo de 01 (um) m&ecirc;s, com in&iacute;cio em 01/11/2023 e termino em 05/12/2023, s&oacute; podendo ser prorrogado mediante Termo Aditivo escrito firmado de comum acordo entre as partes.</p>
 <p style="text-align: justify;">6.2. A cada 12 (doze) meses de vig&ecirc;ncia do presente instrumento, o pre&ccedil;o disposto na Cl&aacute;usula seguinte, ser&aacute; reajustado, com base em &Iacute;ndice abaixo descrito: a) 100% da varia&ccedil;&atilde;o do IPCA;</p>
-<p style="text-align: justify;">6.3. Na falta deste par&acirc;metro ser&aacute; utilizado outro &iacute;ndice eleito de comum acordo pelas partes.</p>
-<p style="text-align: justify;"><strong>&nbsp;</strong></p>
+<p style="text-align: justify;">6.3. Na falta deste par&acirc;metro ser&aacute; utilizado outro &iacute;ndice eleito de comum acordo pelas partes.<strong>&nbsp;</strong></p>
 <p style="text-align: justify;"><strong>CL&Aacute;USULA S&Eacute;TIMA &ndash; DA RESCIS&Atilde;O MOTIVADA </strong></p>
 <p style="text-align: justify;">7.1. Considerar-se-&aacute; o presente contrato autom&aacute;tica e imediatamente rescindido, de pleno direito, independentemente de qualquer notifica&ccedil;&atilde;o ou interpela&ccedil;&atilde;o judicial ou extrajudicial, sem preju&iacute;zo do ressarcimento de eventuais perdas e danos, nas seguintes hip&oacute;teses:</p>
 <p style="text-align: justify;">(a) se qualquer das partes ceder ou transferir a terceiros, total ou parcialmente, por qualquer forma, direitos e obriga&ccedil;&otilde;es que tiver assumido atrav&eacute;s deste contrato, sem a pr&eacute;via e expressa autoriza&ccedil;&atilde;o da outra;</p>
 <p style="text-align: justify;">(b) Pedido de fal&ecirc;ncia, recupera&ccedil;&atilde;o judicial ou extrajudicial ou, ainda, insolv&ecirc;ncia de qualquer das partes.</p>
-<p style="text-align: justify;">&nbsp;</p>
 <p style="text-align: justify;">&nbsp;<strong>CL&Aacute;USULA OITAVA &ndash; DA RESCIS&Atilde;O ANTECIPADA</strong></p>
 <p style="text-align: justify;">8.1 as partes acordam que este Contrato poder&aacute; ser rescindido por m&uacute;tuo acordo ou, ainda, ser denunciado unilateralmente, sem justa causa, a qualquer momento, por qualquer uma delas, ficando a parte interessada obrigada a notificar, por escrito, a outra de sua inten&ccedil;&atilde;o de romp&ecirc;-lo com, no m&iacute;nimo, 30 (trinta) dias de anteced&ecirc;ncia. O exerc&iacute;cio dessa faculdade n&atilde;o implicar&aacute; no pagamento de qualquer multa contratual ou indeniza&ccedil;&atilde;o de qualquer natureza.</p>
-<p style="text-align: justify;">&nbsp;</p>
 <p style="text-align: justify;"><strong>CL&Aacute;USULA NONA &ndash; DO V&Iacute;NCULO EMPREGAT&Iacute;CIO</strong></p>
 <p style="text-align: justify;">9.1. Fica expressamente acordado que a presta&ccedil;&atilde;o dos servi&ccedil;os ora contratados n&atilde;o faz com que seja estabelecido v&iacute;nculo de emprego entre a CONTRATANTE e os empregados e/ou prepostos, a qualquer t&iacute;tulo, da CONTRATADA, n&atilde;o sendo a CONTRATANTE respons&aacute;vel pelo adimplemento de qualquer obriga&ccedil;&atilde;o de cunho trabalhista, previdenci&aacute;rio, fundi&aacute;rio ou acident&aacute;rio, CONTRATADA. Desta forma, fica expressamente estipulada a isen&ccedil;&atilde;o da CONTRATANTE por quaisquer encargos trabalhistas e/ou previdenci&aacute;rios incidentes ou que vierem a incidir, bem como, pela infortun&iacute;stica e eventuais acidentes de trabalho relacionados com a CONTRATADA.</p>
 <p style="text-align: justify;"><strong>CL&Aacute;USULA D&Eacute;CIMA&ndash; DA TRIBUTA&Ccedil;&Atilde;O </strong></p>
 <p style="text-align: justify;">10.1. Todos os impostos, tributos, taxas e encargos federais, estaduais ou municipais que incidam sobre as atividades, servi&ccedil;os e/ou fornecimentos e obriga&ccedil;&otilde;es do Contrato, ser&atilde;o recolhidos sob responsabilidade e &ocirc;nus da CONTRATADA, exceto aqueles indicados no item 11.1.1 abaixo, que ser&aacute; retido pela CONTRATANTE.A CONTRATANTE se reserva o direito de verificar e acompanhar o pagamento destes encargos legais, ou pedir c&oacute;pia, regularmente e a qualquer tempo.</p>
 <p style="text-align: justify;">10.2. Os tributos e contribui&ccedil;&otilde;es, quando devidos na fonte, ser&atilde;o retidos na forma da lei, fazendo-se os pagamentos &agrave; CONTRATADA por seu valor l&iacute;quido.</p>
 <p style="text-align: justify;">10.3. Face ao disposto no caput desta Cl&aacute;usula, a CONTRATANTE n&atilde;o se responsabiliza pelo ressarcimento de quaisquer multas, corre&ccedil;&atilde;o monet&aacute;ria, penalidades, juros e outras despesas resultantes da n&atilde;o observ&acirc;ncia de obriga&ccedil;&otilde;es tribut&aacute;rias, trabalhistas e previdenci&aacute;rias pela CONTRATADA.</p>
-<p style="text-align: justify;">&nbsp;</p>
 <p style="text-align: justify;"><strong>CL&Aacute;USULA D&Eacute;CIMA PRIMEIRA- CESS&Atilde;O, SUCESS&Atilde;O E NOVA&Ccedil;&Atilde;O </strong></p>
 <p style="text-align: justify;">11.1. Nenhuma das partes poder&aacute;, sem a pr&eacute;via e expressa concord&acirc;ncia por escrito da outra, ceder, transferir, penhorar ou caucionar, total ou parcialmente, os direitos, as obriga&ccedil;&otilde;es e/ou os cr&eacute;ditos resultantes do presente contrato, ressalvados os casos de reorganiza&ccedil;&atilde;o societ&aacute;ria e/ou sucess&atilde;o empresarial relativos &agrave; CONTRATANTE.</p>
 <p style="text-align: justify;">11.2. Todos os direitos e obriga&ccedil;&otilde;es oriundos deste contrato ser&atilde;o obrigatoriamente respeitados pelos sucessores das partes, a qualquer t&iacute;tulo.</p>
 <p style="text-align: justify;">11.3. A eventual toler&acirc;ncia de uma parte em rela&ccedil;&atilde;o &agrave; outra, em face de atraso ou n&atilde;o cumprimento, total ou parcial, de qualquer das obriga&ccedil;&otilde;es acordadas no presente Contrato n&atilde;o constituir&aacute; nova&ccedil;&atilde;o, mas mera liberalidade, sendo facultado &agrave; parte afetada, a qualquer momento, exigir o cumprimento das condi&ccedil;&otilde;es contratuais tal como originalmente acordadas.</p>
-<p style="text-align: justify;">&nbsp;</p>
 <p style="text-align: justify;">&nbsp;<strong>CL&Aacute;USULA D&Eacute;CIMA SEGUNDA &ndash; DAS DISPOSI&Ccedil;&Otilde;ES GERAIS </strong></p>
 <p style="text-align: justify;">12.1. As partes contratantes reconhecem, expressamente, que a CONTRATADA n&atilde;o &eacute; empregada, mandat&aacute;ria ou procuradora da CONTRATANTE, n&atilde;o podendo, por conseguinte, assumir obriga&ccedil;&otilde;es e/ou responsabilidades em nome da CONTRATANTE, exceto aquelas expressamente previstas no presente Contrato</p>
 <p style="text-align: justify;">12.2. Quaisquer atrasos ou falhas, por quaisquer das partes, no cumprimento das obriga&ccedil;&otilde;es estabelecidas por for&ccedil;a deste Contrato n&atilde;o constituir&atilde;o falta, nem dar&atilde;o motivos &agrave; rescis&atilde;o ou &agrave; reclama&ccedil;&atilde;o por danos e/ou preju&iacute;zos, quando causados por eventos de caso fortuito ou de for&ccedil;a maior, isto &eacute;, por fato necess&aacute;rio, cujos efeitos n&atilde;o era poss&iacute;vel evitar ou impedir, nos termos do artigo 393, do C&oacute;digo Civil. As partes, desde j&aacute;, comprometem-se a envidar seus melhores esfor&ccedil;os para superar o evento ocorrido e para voltar a cumprir, com a maior brevidade poss&iacute;vel, as suas obriga&ccedil;&otilde;es aqui assumidas.</p>
 <p style="text-align: justify;">12.3. Este Contrato revoga e substitui eventual acordo de mesmo objeto anteriormente celebrado entre as partes que com rela&ccedil;&atilde;o ao qual mutuamente outorgam, nesta data, plena, geral, irrevog&aacute;vel e irretrat&aacute;vel quita&ccedil;&atilde;o, para nada mais ser devido seja a que t&iacute;tulo for.</p>
 <p style="text-align: justify;">12.4. Caso alguma disposi&ccedil;&atilde;o do presente Contrato seja declarada ilegal ou inexequ&iacute;vel, as partes pretendem que as disposi&ccedil;&otilde;es fundamentais remanescentes que as induziram a celebrar o presente Contrato permane&ccedil;am v&aacute;lidas.</p>
 <p style="text-align: justify;">12.5. As disposi&ccedil;&otilde;es contratuais n&atilde;o poder&atilde;o ser alteradas ou modificadas a n&atilde;o ser mediante acordo escrito entre as Partes, formalizado atrav&eacute;s de Termo Aditivo.</p>
-<p style="text-align: justify;">&nbsp;<strong>CL&Aacute;USULA D&Eacute;CIMA TERCEIRA &ndash; SIGILO E CONFIDENCIALIDADE </strong></p>
-<p style="text-align: justify;">&nbsp;</p>
+<p style="text-align: justify;">&nbsp;<strong>CL&Aacute;USULA D&Eacute;CIMA TERCEIRA &ndash; SIGILO E CONFIDENCIALIDADE</strong></p>
 <p style="text-align: justify;">13.1. A CONTRATADA, desde j&aacute;, se obriga por si, seus diretores, funcion&aacute;rios ou pessoal contratado, a manter o mais completo e absoluto sigilo em rela&ccedil;&atilde;o a toda e quaisquer informa&ccedil;&otilde;es relacionada &agrave;s atividades da CONTRATANTE e/ou suas coligadas ou subsidi&aacute;rias, das quais venha a ter conhecimento ou acesso em raz&atilde;o do cumprimento do presente ajuste, n&atilde;o podendo, sob qualquer pretexto, utiliz&aacute;-las para si, divulgar, revelar, reproduzir ou delas dar conhecimento a terceiros, sem a pr&eacute;via e expressa autoriza&ccedil;&atilde;o da CONTRATANTE, responsabilizando-se, em caso de descumprimento dessa obriga&ccedil;&atilde;o assumida, por eventuais perdas e danos, lucros cessantes e demais comina&ccedil;&otilde;es legais.</p>
-<p style="text-align: justify;">&nbsp;</p>
 <p style="text-align: justify;">13.2. As obriga&ccedil;&otilde;es assumidas nesta Cl&aacute;usula subsistir&atilde;o a resili&ccedil;&atilde;o, rescis&atilde;o ou t&eacute;rmino do presente ajuste, por qualquer motivo, vigorando por prazo indeterminado, alcan&ccedil;ando as partes, seus representantes e sucessores a qualquer t&iacute;tulo.</p>
-<p style="text-align: justify;">&nbsp;</p>
 <p style="text-align: justify;">13.3. Disposto nesta Cl&aacute;usula n&atilde;o se aplicar&aacute; a qualquer informa&ccedil;&atilde;o sobre a qual a CONTRATADA possa demonstrar que:</p>
 <p style="text-align: justify;">(i) na ocasi&atilde;o de sua divulga&ccedil;&atilde;o, ela j&aacute; era de dom&iacute;nio p&uacute;blico</p>
 <p style="text-align: justify;">(ii) ap&oacute;s a revela&ccedil;&atilde;o para a CONTRATADA, foi publicada ou tornou-se de outra forma de dom&iacute;nio p&uacute;blico, por motivo n&atilde;o relacionado com eventual falha no recebimento da informa&ccedil;&atilde;o pela pr&oacute;pria CONTRATADA;</p>
 <p style="text-align: justify;">(iii) estava legalmente na posse da CONTRATADA, na ocasi&atilde;o em que a mesma a divulgou.</p>
 <p style="text-align: justify;">13.4. Fica desde j&aacute; convencionado que, para efeitos do disposto nesta Cl&aacute;usula, as informa&ccedil;&otilde;es confidenciais da CONTRATANTE n&atilde;o conter&atilde;o ou vir&atilde;o acompanhadas necessariamente de qualquer tipo de advert&ecirc;ncia de confidencialidade, devendo tal caracter&iacute;stica ser sempre presumida pela CONTRATADA.</p>
-<p style="text-align: justify;">&nbsp;</p>
 <p style="text-align: justify;">&nbsp;<strong>CL&Aacute;USULA D&Eacute;CIMA QUARTA - DO FORO </strong></p>
 <p style="text-align: justify;">Fica eleito o Foro da Comarca de Mogi das Cruzes, Estado de S&atilde;o Paulo, com ren&uacute;ncia expressa a qualquer outro, por mais privilegiado que seja, para dirimir quaisquer d&uacute;vidas e/ou controv&eacute;rsias oriundas do presente contrato.</p>
 <p style="text-align: justify;">E, por estarem assim justas e contratadas, as partes assinam o presente instrumento elaborado em 02 (duas) vias de igual forma e conte&uacute;do, juntamente com as 02 (duas) testemunhas abaixo identificadas.</p>
-<p style="text-align: justify;">&nbsp;</p>
+
+
+<div><p class="parag"><b>DEMAIS OBSERVAÇÕES:</b> {{$locacao->obs}}</p></div>
 </div><br><br>
 
-        <div style="text-align: center; font-size: 12">S&atilde;o Jos&eacute; - SC, {{ $dataAtual->isoFormat('DD MMMM YYYY') }}<br><br><br><br>
+        <div style="text-align: center; font-size: 12">Mogi das Cruzes - SP, {{ $dataAtual->isoFormat('DD MMMM YYYY') }}<br><br><br><br>
 
             ___________________________________________________________<br>
             LOCATÁRIO: {{$locacao->Cliente->nome}}<br><br><br><br>
 
             ___________________________________________________________<br>
-            LOCADOR: HB MOTO CENTER.
+            LOCADOR: EXPRESSO RENT CAR.
 
 
 
