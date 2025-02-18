@@ -35,7 +35,8 @@ class Locacao extends Model
         'valor_parcela_financeiro',
         'valor_total_financeiro',
         'data_vencimento_financeiro',
-        'ocorrencia'
+        'ocorrencia',
+        'contrato'
     ];
 
     protected $casts = [
