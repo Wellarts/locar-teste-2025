@@ -57,6 +57,11 @@ class Locacao extends Model
         return $this->hasMany(ocorrenciaLocacao::class);
     }
 
+    public function Contrato()
+    {
+        return $this->belongsTo(Contrato::class);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

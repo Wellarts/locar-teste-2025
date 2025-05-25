@@ -7,6 +7,7 @@ use App\Filament\Resources\LocacaoResource\Pages;
 use App\Filament\Resources\LocacaoResource\RelationManagers;
 use App\Filament\Resources\LocacaoResource\RelationManagers\OcorrenciaRelationManager;
 use App\Models\Cliente;
+use App\Models\Contrato;
 use App\Models\Estado;
 use App\Models\Locacao;
 use App\Models\Veiculo;
@@ -630,6 +631,10 @@ class LocacaoResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('Imprimir')
                     ->url(fn(Locacao $record): string => route('imprimirLocacao', $record))
+                    ->openUrlInNewTab(),
+                Tables\Actions\Action::make('contrato')
+                    //->label('Contrato Personalizado')
+                    ->url(fn(Locacao $record): string => route('gerarContrato', $record))
                     ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Editar locação')
