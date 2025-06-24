@@ -50,7 +50,7 @@ class ClienteResource extends Resource
                 Forms\Components\Textarea::make('endereco')
                     ->label('Endereço')
                     ->columnSpanFull(),
-                    Forms\Components\Select::make('estado_id')
+                Forms\Components\Select::make('estado_id')
                     ->label('Estado')
                     ->native(false)
                     ->searchable()

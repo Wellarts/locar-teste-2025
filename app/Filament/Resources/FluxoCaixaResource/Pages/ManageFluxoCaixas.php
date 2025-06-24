@@ -17,7 +17,15 @@ class ManageFluxoCaixas extends ManageRecords
         return [
             Actions\CreateAction::make()
                 ->label('Lançamento')
-                ->modalHeading('Lançamento'),
+                ->modalHeading('Lançamento')
+                ->after(function ($record) {
+                    // Atualiza o saldo do caixa após o lançamento
+                    $caixa = \App\Models\Caixa::find($record->caixa_id);
+                    if ($caixa) {
+                        $caixa->saldo_atual += $record->valor;
+                        $caixa->save();
+                    }
+                }),
         ];
     }
 }

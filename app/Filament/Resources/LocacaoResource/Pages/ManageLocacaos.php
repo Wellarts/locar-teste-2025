@@ -38,12 +38,26 @@ class ManageLocacaos extends ManageRecords
             Actions\CreateAction::make()
                 ->label('Novo')
                 ->modalHeading('Criar Locação')
+                // ->before(function ($data, $record) {
+                //     // Se a forma de locação for semanal (2), atualiza data_retorno e qtd_diarias
+                //     if (isset($data['forma_locacao']) && $data['forma_locacao'] == 2) {
+                //         if (isset($data['qtd_semanas']) && isset($data['data_saida'])) {
+                //             $data_saida = Carbon::parse($data['data_saida']);
+                //             $data['qtd_diarias'] = $data['qtd_semanas'] * 7;
+                //             $data['data_retorno'] = $data_saida->copy()->addWeeks($data['qtd_semanas'])->toDateString();
+                //         }
+                //     }
+
+                // })
                 ->after(
                     function ($data, $record) {
                         #ALTERA O STATUS DO VEÍCULO PARA LOCADO
                         $veiculo = Veiculo::find($data['veiculo_id']);
                         $veiculo->status_locado = 1;
                         $veiculo->save();
+
+                       
+                        
 
                         #CRIA REGISTO NO FINANCEIRO
                         if ($record->status_financeiro == true and $record->status_pago_financeiro == false) {
@@ -62,6 +76,7 @@ class ManageLocacaos extends ManageRecords
                                     'status' => 0,
                                     'obs' => 'Parcela referente a locação nº: ' . $record->id . '',
                                     'valor_parcela' => $valor_parcela,
+                                    
 
                                 ];
                                 ContasReceber::create($parcelas);
@@ -72,21 +87,23 @@ class ManageLocacaos extends ManageRecords
                             $parcelas = [
                                 'cliente_id' => $data['cliente_id'],
                                 'valor_total' => $data['valor_total_financeiro'],
-                                'parcelas' => $data['parcelas_financeiro'],
+                                'parcelas' => $data['parcelas_financeiro'] ?? 1,
                                 'formaPgmto' => $data['formaPgmto_financeiro'],
                                 'ordem_parcela' => 1,
-                                'data_vencimento' => $data['data_vencimento_financeiro'],
-                                'data_recebimento' => $data['data_vencimento_financeiro'],
+                                'data_vencimento' => $data['data_vencimento_financeiro'] ?? Carbon::now(),
+                                'data_recebimento' => $data['data_vencimento_financeiro'] ?? Carbon::now(),
                                 'valor_recebido' => $data['valor_total_financeiro'],
                                 'status' => 1,
                                 'obs' => 'Recebimento referente da locação nº: ' . $record->id . '',
                                 'valor_parcela' => $data['valor_total_financeiro'],
+                                'caixa_id' => $data['caixa_id'],
                             ];
                             ContasReceber::create($parcelas);
 
                             $addFluxoCaixa = [
                                 'valor' => $data['valor_total_financeiro'],
                                 'tipo'  => 'CREDITO',
+                                'caixa_id' => $data['caixa_id'],
                                 'obs'   => 'Recebimento da conta do cliente '.$record->cliente->nome.'',
                             ];
 

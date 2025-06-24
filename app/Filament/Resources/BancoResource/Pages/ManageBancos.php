@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\ContratoResource\Pages;
+namespace App\Filament\Resources\BancoResource\Pages;
 
-use App\Filament\Resources\ContratoResource;
+use App\Filament\Resources\BancoResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 
-class ManageContratos extends ManageRecords
+class ManageBancos extends ManageRecords
 {
-    protected static string $resource = ContratoResource::class;
+    protected static string $resource = BancoResource::class;
 
     protected function getHeaderActions(): array
     {

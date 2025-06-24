@@ -158,6 +158,12 @@ class ContasReceberResource extends Resource
                     ->numeric()
                     ->prefix('R$')
                     ->inputMode('decimal'),
+                Forms\Components\Select::make('caixa_id')
+                    ->label('Caixa')
+                    ->relationship('caixa', 'nome')
+                    ->required()
+                    ->preload()
+                    ->searchable(),                    
                 Forms\Components\Textarea::make('obs')
                     ->label('Observações'),
             ]);
@@ -282,6 +288,7 @@ class ContasReceberResource extends Resource
                             $addFluxoCaixa = [
                                 'valor' => ($record->valor_parcela),
                                 'tipo'  => 'CREDITO',
+                                'caixa_id' => $record->caixa_id,
                                 'obs'   => 'Recebimento da conta do cliente ' . $record->cliente->nome . ' da parcela nº: ' . $record->ordem_parcela . '',
                             ];
 

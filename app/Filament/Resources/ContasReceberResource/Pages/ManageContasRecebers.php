@@ -40,6 +40,7 @@ class ManageContasRecebers extends ManageRecords
                                         'status' => 0,
                                         'obs' => $data['obs'],
                                         'valor_parcela' => $valor_parcela,
+                                        'caixas_id' => $data['caixas_id'],
                                         ];
                             ContasReceber::create($parcelas);
                     }
@@ -52,6 +53,7 @@ class ManageContasRecebers extends ManageRecords
                     $addFluxoCaixa = [
                         'valor' => ($record->valor_total),
                         'tipo'  => 'CREDITO',
+                        'caixa_id' => $data['caixas_id'],
                         'obs'   => 'Recebimento da conta do cliente '.$record->cliente->nome.'',
                     ];
 

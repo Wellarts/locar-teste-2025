@@ -14,6 +14,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Grouping\Group;
+use Filament\Tables\Filters\SelectFilter;
 
 class FluxoCaixaResource extends Resource
 {
@@ -34,14 +36,45 @@ class FluxoCaixaResource extends Resource
                         'CREDITO' => 'CRÉDITO',
                         'DEBITO' => 'DÉBITO',
                     ])
+                    ->live()
+                    ->afterStateUpdated(function ($context ,$state, callable $set, callable $get) {
+                        if($context === 'edit') {
+                            if ($state === 'DEBITO') {
+                                $valor = $get('valor');
+                                if ($valor > 0) {
+                                    $set('valor', -abs($valor));
+                                }
+                            } elseif ($state === 'CREDITO') {
+                                $valor = $get('valor');
+                                if ($valor < 0) {
+                                    $set('valor', abs($valor));
+                                }
+                            }
+                        }
+                    })
                     ->required(),
+
+                Forms\Components\Select::make('caixa_id')
+                    ->label('Caixa')
+                    ->relationship('caixa', 'nome')
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->placeholder('Selecione um Caixa'),
 
                 Forms\Components\TextInput::make('valor')
                     ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 2)
                     ->numeric()
                     ->prefix('R$')
                     ->inputMode('decimal')
-                    ->required(),
+                    ->required()
+                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                        if ($get('tipo') === 'DEBITO' && $state > 0) {
+                            $set('valor', -abs($state));
+                        } elseif ($get('tipo') === 'CREDITO' && $state < 0) {
+                            $set('valor', abs($state));
+                        }
+                    }),
 
                 Forms\Components\Textarea::make('obs')
                     ->label('Descrição')
@@ -55,6 +88,10 @@ class FluxoCaixaResource extends Resource
     {
         return $table
             ->defaultSort('created_at', 'desc')
+            ->groups([
+            Group::make('caixa.nome')
+                ->label('Caixas'),
+            ])
             ->columns([
                 Tables\Columns\TextColumn::make('tipo')
                     ->searchable()
@@ -70,12 +107,16 @@ class FluxoCaixaResource extends Resource
                 Tables\Columns\TextColumn::make('valor')
                     ->summarize(Sum::make()->money('BRL')->label('Total'))
                     ->money('BRL'),
+                Tables\Columns\TextColumn::make('caixa.nome')
+                    ->label('Caixa')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('obs')
                     ->label('Descrição')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Data Hora')
-                    ->dateTime()
+                    ->label('Datae e Hora')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
                 // ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -90,6 +131,12 @@ class FluxoCaixaResource extends Resource
                 Filter::make('DEBITO')
                     ->label('Débito')
                     ->query(fn(Builder $query): Builder => $query->where('tipo', 'DEBITO')),
+                SelectFilter::make('caixa_id')
+                    ->label('Caixa')
+                    ->relationship('caixa', 'nome')
+                    ->searchable()
+                    ->preload()
+                    ->placeholder('Todos os Caixas'),
                 Tables\Filters\Filter::make('created_at')
                     ->form([
                         Forms\Components\DatePicker::make('data_de')
@@ -111,12 +158,35 @@ class FluxoCaixaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Editar lançamento de caixa'),
-                Tables\Actions\DeleteAction::make(),
+                    ->modalHeading('Editar lançamento de caixa')
+                    ->before(function ($record, $data) {
+                        // Atualiza o saldo do caixa apenas com a diferença entre o valor antigo e o novo valor
+                        $caixa = $record->caixa;
+                       
+                        if ($caixa) {
+                            // Recupera o valor original do registro antes da edição
+                            $originalValor = $record->valor;
+                            $diferenca = $data['valor'] - $originalValor;
+                            $caixa->saldo_atual += $diferenca;
+                            $caixa->save();
+                        }
+                    
+                    }),
+                Tables\Actions\DeleteAction::make()
+                    ->modalHeading('Excluir lançamento de caixa')
+                    ->before(function ($record) {
+                        // Ao excluir, subtrai o valor do lançamento do saldo_atual do caixa
+                        $caixa = $record->caixa;
+
+                        if ($caixa) {
+                            $caixa->saldo_atual -= $record->valor;
+                            $caixa->save();
+                        }
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                  //  Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([

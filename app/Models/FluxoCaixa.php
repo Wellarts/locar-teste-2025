@@ -15,8 +15,14 @@ class FluxoCaixa extends Model
         'valor',
         'tipo',
         'obs',
+        'caixa_id',
        
     ];
+
+    public function caixa()
+    {
+        return $this->belongsTo(Caixa::class);
+    }
 
     public function getActivitylogOptions(): LogOptions
     {

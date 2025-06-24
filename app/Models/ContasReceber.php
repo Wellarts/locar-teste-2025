@@ -24,6 +24,7 @@ class ContasReceber extends Model
         'valor_recebido',
         'obs',
         'categoria_id',
+        'caixa_id',
     ];
 
     public function Cliente()
@@ -35,6 +36,13 @@ class ContasReceber extends Model
     {
         return $this->belongsTo(Categoria::class);
     }
+
+    public function caixa()
+    {
+        return $this->belongsTo(Caixa::class);
+    }
+
+    
 
     public function getActivitylogOptions(): LogOptions
     {
